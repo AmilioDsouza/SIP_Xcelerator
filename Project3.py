@@ -51,3 +51,15 @@ processed_features = vectorizer.fit_transform(processed_features).toarray()
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(processed_features, labels, test_size=0.2, random_state=0)
+
+#training the model
+from sklearn.ensemble import RandomForestClassifier
+
+text_classifier = RandomForestClassifier(n_estimators=200, random_state=0)
+text_classifier.fit(X_train, y_train)
+predictions = text_classifier.predict(X_test)
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+
+print(confusion_matrix(y_test,predictions))
+print(classification_report(y_test,predictions))
+print(accuracy_score(y_test, predictions))
